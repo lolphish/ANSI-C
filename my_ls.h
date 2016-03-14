@@ -39,7 +39,7 @@ void check_type(char * name, int padding);
 /*
  * prints the necessary components for a directory, then recursively
  * calls the generate_stat function for that file 
- */
+ */ 
 void _is_dir(char * name, struct stat st, char * file_name, int padding);
 
 // Print, in order: mode  num_links  owner  group  size_in_bytes modification_timedate name
