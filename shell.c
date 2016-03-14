@@ -1,11 +1,11 @@
 /*
-  ICS 53: Principles of System Design
-  Winter Quarter 2015/2016
-  Shell Program that can handle pipes, background, and redirection.
-  Program parsing is not exactly correct and can only handle
-  if reasonably spaced. 
-  e.g: cat < existingInputFile | tr A-Z a-z | tee newOutputFile1 | tr a-z A-Z > newOutputFile2 &
-*/
+ * ICS 53: Principles of System Design
+ * Winter Quarter 2015/2016
+ * Shell Program that can handle pipes, background, and redirection.
+ * Program parsing is not exactly correct and can only handle
+ * if reasonably spaced. 
+ * e.g: cat < existingInputFile | tr A-Z a-z | tee newOutputFile1 | tr a-z A-Z > newOutputFile2 &
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -64,10 +64,10 @@ void crunch_up(char ** array, int index)
 }
 
 /* 
-// If the user input has no spaces between the redirection symbol and input
-// i.e: <input, store_parsed_arguments will separate the symbol from the input
-// i.e: < , input
-*/
+ * If the user input has no spaces between the redirection symbol and input
+ * i.e: <input, store_parsed_arguments will separate the symbol from the input
+ * i.e: < , input
+ */
 void store_parsed_arguments( char * array[] )
 {
     for ( int i = 0; i < count; ++i)
@@ -88,9 +88,10 @@ void parse_redirection(int index, char ** arguments, char ** redirection)
     for ( ; i < pipe_counter[index]; ++i)
         *redirection++ = pipeArray[index][i];
 }
-
-// Find if there is a redirection input: if there is one, use dup2
-// to make the redirection
+/*
+ * Find if there is a redirection input: if there is one, use dup2
+ * to make the redirection
+ */
 int redirect_in(char ** redirection)
 {    
     for (int i = 0; redirection[i]; ++i)
@@ -105,9 +106,9 @@ int redirect_in(char ** redirection)
 }
 
 /*
-// Find if there is a redirection output: if there is one, use dup2
-// to make the redirection
-*/
+ * Find if there is a redirection output: if there is one, use dup2
+ * to make the redirection
+ */
 int redirect_out(char ** redirection)
 {
     for (int i = 0; redirection[i]; ++i)
@@ -146,9 +147,9 @@ void execute(char * args[], int background, int in, int out)
 }
 
 /*
-// Execute the argument with the piping (if there is one) and create
-// any redirection needed 
-*/
+ * Execute the argument with the piping (if there is one) and create
+ * any redirection needed 
+ */
 int execute_redirection(char ** arguments, char ** redirection, int input, int output, int background)
 {
     int in = (input != -1 ? input : redirect_in(redirection));
@@ -159,9 +160,9 @@ int execute_redirection(char ** arguments, char ** redirection, int input, int o
 }
 
 /*
-// checks if there is a & (background) symbol in the argument
-// if there is a background symbol, return 0, else 1
-*/
+ * checks if there is a & (background) symbol in the argument
+ * if there is a background symbol, return 0, else 1
+ */
 int run_background(int index)
 {
     if (strcmp(pipeArray[pipe_count-1][pipe_counter[index] -1], "&") == 0)
@@ -170,10 +171,10 @@ int run_background(int index)
 }
 
 /*
-// check if the input is bigger than pipe and end if it is
-// creat the argument argv and the redirection items and run the 
-// execute function
-*/
+ * check if the input is bigger than pipe and end if it is
+ * creat the argument argv and the redirection items and run the 
+ * execute function
+ */
 int execute_all( int index, int input, int output)
 {
    char * arguments[SIZE];
@@ -236,9 +237,10 @@ void pipe_one(int first)
 {
     execute_all(first, -1, -1);
 }
-
-// Program will work differently depending on if there are one command
-// or multiple commands. If there are one command, a pipe is not made.
+/*
+ * Program will work differently depending on if there are one command
+ * or multiple commands. If there are one command, a pipe is not made.
+ */
 void pipe_one_or_more()
 {
     if (pipe_count <= 1)
@@ -251,11 +253,11 @@ void pipe_one_or_more()
 }
 
 /*
-// Calls the count function to count the parseArray to the global counter
-// then call the store_parsed_arguments function parse the < > symbols
-// then split each command by pipe using make_pipe_array() and call the 
-// pipe_one_or_more function
-*/
+ * Calls the count function to count the parseArray to the global counter
+ * then call the store_parsed_arguments function parse the < > symbols
+ * then split each command by pipe using make_pipe_array() and call the 
+ * pipe_one_or_more function
+ */
 int run_program()
 {
     count_argument_size();
@@ -266,8 +268,7 @@ int run_program()
 }
 
 
-// main takes in a line of input, strips it of the ending \n and runs the
-// shell program
+// main takes in a line of input, strips it of the ending \n and runs shell
 int main(int argc, char * argv[])
 {
     char buf[SIZE];
