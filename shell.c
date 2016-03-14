@@ -268,7 +268,7 @@ int run_program()
 }
 
 
-// main takes in a line of input, strips it of the ending \n and runs shell
+// main takes in a line of input, strips it of the ending newline and runs shell
 int main(int argc, char * argv[])
 {
     char buf[SIZE];
