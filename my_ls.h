@@ -54,7 +54,7 @@ void _print_group(struct stat st);
 // Computes the size and time of modification of the file and prints it
 void _print_size_and_time(struct stat st);
 
-// an amalgamation of various print functions for the file
+// an amalgamation of various print functions for the file 
 void _print_variables(struct stat st);
 
 // Prints the Read, Write, and Execute permissions for the user
